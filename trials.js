@@ -8,13 +8,13 @@ module.exports = function(list) {
     var trial = list[i]
     trials[trial.name] = trial
     trial.next = list[+1]
-  })
-
+  }
 
   return function*(next) {
-    var team = this.header['x-teamname']
-    var trial = this.header['x-trial']
+    var team = this.header['x-team']
+    var name = this.header['x-trial']
     var result = this.header['x-result']
+    var options = this.header['x-options']
     var trial = trials[name]
 
     if (!trial) {
@@ -22,20 +22,26 @@ module.exports = function(list) {
       return this.status = 404
     }
 
-    if (yield trial.verify(result)) {
+    try { options = JSON.parse(options) }
+    catch (ex) {}
+
+    if (yield trial.verify(result, options)) {
       console.log('%s completed "%s"'.green, team, trial.name)
       this.status = 200
-      var next = trial.next
+      var nextTrial = trial.next
 
-      if (!next) {
+      if (!nextTrial) {
         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'.green)
         console.log(' %s has completed all %d trials!', team, list.length)
         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'.green)
         return
       }
 
-      this.set('x-trial', trial.name)
-      this.body = yield next.puzzle()
+      this.set('x-trial', nextTrial.name)
+      this.body = {
+        options: yield nextTrial.puzzle(),
+        description: nextTrial.description
+      }
     }
     else {
       console.log('%s attempted "%s" and failed.'.red, team, trial.name)
