@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "watch": "nodemon --harmony --watch ./ ./server.js",
+    "start": "node --harmony server.js"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,12 @@
   },
   "homepage": "https://github.com/mikefrey/node-trial-server",
   "dependencies": {
-    "koa-logger": "~1.2.0",
-    "koa-route": "~1.1.4",
-    "koa-body": "0.0.4",
     "koa": "~0.6.0",
-    "koa-send": "~1.2.3",
+    "koa-body": "0.0.4",
+    "koa-logger": "~1.2.0",
     "koa-router": "~3.1.3",
-    "colors": "~0.6.2"
+    "koa-send": "~1.2.3",
+    "colors": "~0.6.2",
+    "thunkify": "~2.1.1"
   }
 }
