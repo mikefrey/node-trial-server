@@ -29,7 +29,7 @@ module.exports = function(app, list) {
     try { options = JSON.parse(options) }
     catch (ex) {}
 
-    if (yield trial.verify.call(this, result, options)) {
+    if (yield trial.verify.call(this, result, options.args)) {
       console.log('%s completed "%s"'.green, team, trial.name)
       this.status = 200
       var nextTrial = trial.next
@@ -47,7 +47,8 @@ module.exports = function(app, list) {
       this.set('x-trial', nextTrial.name)
       this.body = {
         args: yield nextTrial.puzzle.call(this),
-        description: nextTrial.description
+        description: nextTrial.description,
+        stream: !!nextTrial.stream
       }
     }
     else {

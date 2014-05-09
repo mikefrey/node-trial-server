@@ -18,11 +18,11 @@ app.use(router(app))
 trials(app, [
   require('./trials/start'),
   require('./trials/http-get'),
+  require('./trials/crypto'),
   // require('./trials/http-post'),
   // require('./trials/async'), // make several reqeusts and reassemble in the correct order
-  // require('./trials/gunzip'), // unzip a file to be used in later trials.
-  // require('./trials/usefile'),
-  require('./trials/crypto')
+  require('./trials/gunzip'), // unzip a file to be used in later trials.
+  // require('./trials/usefile')
 ])
 
 app.listen(3001)

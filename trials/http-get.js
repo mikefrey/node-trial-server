@@ -1,5 +1,11 @@
+var crypto = require('crypto')
+
 function reverse(str) {
   return str.split('').reverse().join('')
+}
+
+function getId() {
+  return crypto.pseudoRandomBytes(4).toString('hex')
 }
 
 module.exports = {
@@ -8,14 +14,14 @@ module.exports = {
 
   route: {
     method: 'get',
-    path: '/http/:num',
+    path: '/http/:id',
     handler: function*(next) {
-      this.body = reverse(this.params.num)
+      this.body = reverse(this.params.id)
     }
   },
 
   puzzle: function*() {
-    return global.serverAddress + '/http/' + ((Math.random() * 10000000)|0)
+    return global.serverAddress + '/http/' + getId()
   },
 
   verify: function*(result, options) {

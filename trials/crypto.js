@@ -1,6 +1,4 @@
 var crypto = require('crypto')
-var thunkify = require('thunkify')
-
 
 function* hash(key, team) {
   var hmac = crypto.createHmac('sha256', key)
