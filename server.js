@@ -22,7 +22,8 @@ trials(app, [
   // require('./trials/http-post'),
   // require('./trials/async'), // make several reqeusts and reassemble in the correct order
   require('./trials/gunzip'), // unzip a file to be used in later trials.
-  // require('./trials/usefile')
+  // require('./trials/usefile'),
+  require('./trials/socket')
 ])
 
 app.listen(3001)
