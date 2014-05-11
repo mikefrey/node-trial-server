@@ -22,14 +22,9 @@ trials(app, [
   // require('./trials/http-post'),
   // require('./trials/async'), // make several reqeusts and reassemble in the correct order
   require('./trials/gunzip'), // unzip a file to be used in later trials.
-  // require('./trials/usefile'),
   require('./trials/socket')
 ])
 
 app.listen(3001)
 
 console.log('Trials Server started at %s', global.serverAddress.blue)
-
-
-// turn callbacks into writeable/readable streams so
-// results can be streamed to the callback.

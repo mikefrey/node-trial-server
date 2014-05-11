@@ -38,11 +38,13 @@ var trial = {
 Provide a function that takes three arguments, `ip`, `port` and `outStream`.\n\
 Create a socket connection to the IP in the `ip` argument. Once connected,\n\
 listen for data, pipe it through a transform stream, changing any lowercase\n\
-letters to uppercase, then pipe the transformed data to `outStream`\n\
+letters to uppercase, then pipe the transformed data to `outStream`.\n\
 \n\
-Hint: You can use the `event-stream` module to easily transform the data\n\
-flowing through the stream from the socket connection.\n\
-https://github.com/dominictarr/event-stream#through-write-end'
+Hint 1: Documentation for opening sockets can be found here:\n\
+http://nodejs.org/api/net.html\n\
+\n\
+Hint 2: You can use the `event-stream` module to easily transform data flowing\n\
+through a stream. https://github.com/dominictarr/event-stream#through-write-end'
 
 }
 
