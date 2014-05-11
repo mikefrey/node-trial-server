@@ -18,9 +18,21 @@ module.exports = {
     return (yield hash(options, this.team)) == result
   },
 
-  description: 'Provide a function that takes two arguments, `key` and `callback`.\n\
+  description: '\n\
+Provide a function that takes two arguments, `key` and `callback`.\n\
 Generate a hmac hash of your team name using sha256 and the given key. Call the\n\
 callback with the Base64 encoded hash as the result. Make sure you run the\n\
 callback in the standard way, error first: `callback(err, result)`.'
 
 }
+
+/** Solution
+
+trials.add(function(key, callback) {
+  var crypto = require('crypto')
+  var hmac = crypto.createHmac('sha256', key)
+  hmac.update(trials.teamName)
+  callback(null, hmac.digest('base64'))
+})
+
+*/

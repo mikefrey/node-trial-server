@@ -41,9 +41,22 @@ module.exports = {
     return (yield getGzip(id)).txt == result
   },
 
-  description: 'Provide a function that takes two arguments, `url` and `outStream`.\n\
+  description: '\n\
+Provide a function that takes two arguments, `url` and `outStream`.\n\
 Make an HTTP GET request to the given url which will respond with a gzipped\n\
 text file. Gunzip the text file and pipe it\'s contents to `outStream`.\n\
 (Hint: check out the zlib documentation in Node core.)'
 
 }
+
+/** Solution
+
+trials.add(function(url, outStream) {
+  var http = require('http')
+  var zlib = require('zlib')
+  http.get(url, function(res) {
+    res.pipe(zlib.createGunzip()).pipe(outStream)
+  })
+})
+
+*/

@@ -28,9 +28,24 @@ module.exports = {
     return reverse(options).indexOf(result) == 0
   },
 
-  description: 'Provide a function that takes two arguments, `url` and `callback`. Make an HTTP\n\
+  description: '\n\
+Provide a function that takes two arguments, `url` and `callback`. Make an HTTP\n\
 GET request to the provided url and run the callback with the response body of\n\
 the request. Make sure you run the callback in the standard way, error first:\n\
 `callback(err, result)`. '
 
 }
+
+/** Solution
+
+trials.add(function(url, callback) {
+  var http = require('http')
+  var es = require('event-stream')
+  http.get(url, function(res) {
+    res.pipe(es.wait(function(err, data) {
+      callback(null, data.toString())
+    }))
+  })
+})
+
+*/
