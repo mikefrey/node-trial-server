@@ -1,3 +1,5 @@
+var raw = require('raw-body')
+
 module.exports = function(app, list) {
 
   // build up the trials hash for quick lookup of
@@ -17,9 +19,15 @@ module.exports = function(app, list) {
   app.all('/', function*(next) {
     var team = this.team = this.header['x-team']
     var name = this.header['x-trial']
-    var result = this.header['x-result']
+    // var result = this.header['x-result']
     var options = this.header['x-options']
     var trial = trials[name]
+
+    var result = yield function(done) {
+      raw(this.req, { encoding:'utf8' }, done)
+    }
+
+    if (result) result = (new Buffer(result, 'base64'))
 
     if (!trial) {
       console.log('\nNo trial found! %s', team)

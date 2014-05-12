@@ -1,4 +1,3 @@
-var crypto = require('crypto')
 var net = require('net')
 var thunkify = require('thunkify')
 var co = require('co')
@@ -31,7 +30,7 @@ var trial = {
   },
 
   verify: function*(result, options) {
-    return trial.description.replace(/\n/g, '').toUpperCase() == result
+    return trial.description.replace(/\n/g, '').toUpperCase() == result.toString()
   },
 
   description: '\n\
@@ -40,7 +39,7 @@ Create a socket connection to the IP in the `ip` argument. Once connected,\n\
 listen for data, pipe it through a transform stream, changing any lowercase\n\
 letters to uppercase, then pipe the transformed data to `outStream`.\n\
 \n\
-Hint 1: Documentation for opening sockets can be found here:\n\
+Hint 1: Documentation for opening socket connections can be found here:\n\
 http://nodejs.org/api/net.html\n\
 \n\
 Hint 2: You can use the `event-stream` module to easily transform data flowing\n\

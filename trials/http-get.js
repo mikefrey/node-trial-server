@@ -25,7 +25,7 @@ module.exports = {
   },
 
   verify: function*(result, options) {
-    return reverse(options).indexOf(result) == 0
+    return reverse(options).indexOf(result.toString()) == 0
   },
 
   description: '\n\

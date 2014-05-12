@@ -15,7 +15,7 @@ module.exports = {
   },
 
   verify: function*(result, options) {
-    return (yield hash(options, this.team)) == result
+    return (yield hash(options, this.team)) == result.toString()
   },
 
   description: '\n\

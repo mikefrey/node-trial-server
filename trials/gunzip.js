@@ -38,7 +38,7 @@ module.exports = {
 
   verify: function*(result, options) {
     var id = options.match(/\d+$/)[0]
-    return (yield getGzip(id)).txt == result
+    return (yield getGzip(id)).txt == result.toString()
   },
 
   description: '\n\
