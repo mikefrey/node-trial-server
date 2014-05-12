@@ -73,11 +73,8 @@ var trial = module.exports = {
   },
 
   verify: function*(result, options) {
-    // var resBuf = new Buffer(result, 'utf8')
     var id = options[0].match(/\d+$/)[0]
     var msg = (yield getMessage(id))
-
-    console.log(result.toString('hex'))
 
     var enc = yield(gunzip(result))
     var decipher = crypto.createDecipher('aes256', msg.password)
@@ -85,9 +82,6 @@ var trial = module.exports = {
 
     var response = outBuf.toString('utf8')
     var expected = msg.message.replace(/[aeiou]/g, '')
-
-    console.log('\n\n' + response)
-    console.log('\n\n' + expected)
 
     return response == expected
   },
@@ -104,5 +98,27 @@ piping it to outStream.'
 
 /** Solution
 
+trials.add(function(passwordUrl, messageUrl, outStream) {
+  var http = require('http')
+  var zlib = require('zlib')
+  var crypto = require('crypto')
+  var through = require('through')
+  var concat = require('concat-stream')
+
+  http.get(passwordUrl, function(res) {
+    res.pipe(concat(function(password) {
+      http.get(messageUrl, function(res) {
+        res.pipe(zlib.createGunzip())
+           .pipe(crypto.createDecipher('aes256', password))
+           .pipe(through(function(data) {
+              this.emit('data', data.toString().replace(/[aeiou]/g, ''))
+           }))
+           .pipe(crypto.createCipher('aes256', password))
+           .pipe(zlib.createGzip())
+           .pipe(outStream)
+      })
+    }))
+  })
+})
 
 */

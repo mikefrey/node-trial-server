@@ -40,9 +40,9 @@ the request. Make sure you run the callback in the standard way, error first:\n\
 
 trials.add(function(url, callback) {
   var http = require('http')
-  var es = require('event-stream')
+  var concat = require('concat-stream')
   http.get(url, function(res) {
-    res.pipe(es.wait(function(err, data) {
+    res.pipe(concat(function(data) {
       callback(null, data.toString())
     }))
   })

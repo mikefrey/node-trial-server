@@ -54,8 +54,8 @@ module.exports = trial
 
 trials.add(function(ip, port, outStream) {
   var net = require('net')
-  var es = require('event-stream')
-  var upper = es.through(function(data) {
+  var through = require('through')
+  var upper = through(function(data) {
     this.emit('data', data.toString().toUpperCase())
   })
   var socket = net.connect(port, ip)
