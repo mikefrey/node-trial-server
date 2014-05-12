@@ -30,8 +30,8 @@ module.exports = {
 
   description: '\n\
 Provide a function that takes two arguments, `url` and `callback`. Make an HTTP\n\
-GET request to the provided url and run the callback with the response body of\n\
-the request. Make sure you run the callback in the standard way, error first:\n\
+GET request to the provided url and run the callback with the body of the\n\
+response. Make sure you run the callback in the standard way, error first:\n\
 `callback(err, result)`. '
 
 }

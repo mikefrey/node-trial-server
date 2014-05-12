@@ -55,6 +55,7 @@ trials.add(function(port, callback) {
   var http = require('http')
   var server = http.createServer(function(req, res) {
     req.pipe(res)
+    res.on('finish', function() { server.close() })
   }).listen(port, callback)
 })
 

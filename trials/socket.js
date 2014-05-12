@@ -42,8 +42,8 @@ letters to uppercase, then pipe the transformed data to `outStream`.\n\
 Hint 1: Documentation for opening socket connections can be found here:\n\
 http://nodejs.org/api/net.html\n\
 \n\
-Hint 2: You can use the `event-stream` module to easily transform data flowing\n\
-through a stream. https://github.com/dominictarr/event-stream#through-write-end'
+Hint 2: You can use the `through` module to easily transform data flowing\n\
+through a stream. https://github.com/dominictarr/through'
 
 }
 
