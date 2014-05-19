@@ -12,7 +12,7 @@ require('./setUrl')(port)
 
 var app = koa()
 
-app.use(logger())
+// app.use(logger())
 app.use(router(app))
 
 trials(app, [

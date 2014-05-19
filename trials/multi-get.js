@@ -5,12 +5,11 @@ function getId() {
 }
 
 function urlToId(url) {
-  // try {
+  try {
     var idx = url.lastIndexOf('/')
     url = url.substring(idx+1)
-    console.log(url)
     return parseInt(url, 16)
-  // } catch (ex) {}
+  } catch (ex) {}
   return null
 }
 

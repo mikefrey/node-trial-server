@@ -24,12 +24,16 @@ var trial = {
     // properly use http.request with co.
     var response = yield function(callback) {
       var opts = { method:'POST', hostname: remoteAddr, port: port }
-      var req = http.request(opts, function(res) {
-        res.pipe(es.wait(function(err, data) {
-          callback(null, data.toString())
-        }))
-      })
-      req.end(trial.description)
+      try {
+        var req = http.request(opts, function(res) {
+          try {
+            res.pipe(es.wait(function(err, data) {
+              callback(null, data.toString())
+            }))
+          } catch(ex) {}
+        })
+        req.end(trial.description)
+      } catch(ex) {}
     }
 
     return response == trial.description
