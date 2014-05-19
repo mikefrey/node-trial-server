@@ -15,6 +15,7 @@ var app = koa()
 // app.use(logger())
 app.use(router(app))
 
+// Reorder, add or remove these to suit your needs
 trials(app, [
   require('./trials/start'),
   require('./trials/http-get'),
